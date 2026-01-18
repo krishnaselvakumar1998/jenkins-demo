@@ -2,7 +2,9 @@ FROM alpine:latest
 
 WORKDIR /app
 
-COPY app.sh .
+COPY app.sh /app/app.sh
 
-CMD ["./app.sh"]
+RUN chmod +x /app/app.sh
+
+CMD ["/bin/sh", "/app/app.sh"]
 
