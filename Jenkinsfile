@@ -1,10 +1,21 @@
 pipeline {
     agent any
     stages {
-        stage('Test') {
+        stage('Checkout') {
             steps {
-                echo 'Jenkins pulled code from GitHub successfully'
-                sh 'ls'
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t jenkins-demo:1.0 .'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh 'docker run jenkins-demo:1.0'
             }
         }
     }
